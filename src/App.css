@@ -1,0 +1,170 @@
+body {
+  background-color: rgb(253, 250, 244); /* Sets the background of the entire page to light blue */
+}
+
+.headline {
+  font-size: 50px;
+}
+
+.board {
+    display: flex;
+    flex-direction: column; /* 👈 stack rows vertically */
+    justify-content: center;
+    align-items: center;
+    gap: 10px; /* space between rows */
+    padding-top: 50px;
+  }
+
+.corres {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px; /* space between boxes */
+    margin-top: 10px;
+    perspective: 800px;
+  }
+  
+  .container {
+    width: 60px;
+    height: 60px;
+    border: 1.5px solid #7b7b7b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    background-color: #38383a;
+    color: #fff;
+    border-radius: 10px;
+    backface-visibility: hidden;
+  }
+  
+  
+  .flip {
+    animation: flip 1s ease forwards;
+  }
+  
+  @keyframes flip {
+    from {
+      transform: rotateX(0deg);
+    }
+    to {
+      transform: rotateX(360deg);
+    }
+  }
+
+  .empty_container {
+    width: 60px;
+    height: 60px;
+    border: 1.5px solid #b8b8b8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    background-color: rgb(253, 250, 244);
+    color: #fff;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+  }
+  
+  
+  /* Optional hover/animation for fun */
+  .container:not(:empty) {
+    border-color: #565758;
+    transform: scale(1.05);
+  }
+
+  .container.grey {
+    background-color: #3a3a3c;
+  }
+
+  .container.green {
+    background-color: #538d4e; /* Wordle green */
+    border-color: #538d4e;
+    color: #fff;
+  }
+
+  .container.yellow {
+    background-color: #b59f3b; /* Wordle yellow */
+    border-color: #b59f3b;
+    color: #fff;
+  }
+
+  .keyboard {
+    margin-top: 10px;
+    padding: 0;                 /* ❌ no side padding */
+    width: 100%;
+    user-select: none;
+    touch-action: manipulation;
+  }
+  
+  /* rows */
+  .key-row {
+    display: flex;
+    justify-content: center;
+    gap: 4px;                   /* small internal gap only */
+    margin-bottom: 6px;
+    width: 100%;
+  }
+  
+  /* keys */
+  .key {
+    flex: 1;                    /* fill row width */
+    max-width: 52px;            /* desktop cap */
+    height: 64px;
+    font-size: 14px;
+    border-radius: 8px;
+    border: none;
+    background: #3a3a3c;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+  
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Enter / Backspace */
+  .key-row:last-child .key:first-child,
+  .key-row:last-child .key:last-child {
+    flex: 1.4;
+    max-width: 82px;
+  }
+  
+  /* colors */
+  .key.green { background: #538d4e; }
+  .key.yellow { background: #b59f3b; }
+  .key.grey { background: #3a3a3c; }
+  
+  /* pressed */
+  .key:active,
+  .key.pressed {
+    transform: scale(0.95);
+    background: #565758;
+    box-shadow: inset 0 0 0 2px #999;
+    transition: transform 0.05s ease, background-color 0.05s ease;
+  }
+  
+  /* 📱 mobile */
+  @media (max-width: 480px) {
+    .keyboard {
+      margin-top: 6px;
+    }
+  
+    .key-row {
+      gap: 3px;
+      margin-bottom: 5px;
+    }
+  
+    .key {
+      height: 56px;
+      font-size: 13px;
+      border-radius: 7px;
+      max-width: none;          /* let flex fully stretch */
+    }
+  }
+
+  
