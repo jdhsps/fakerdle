@@ -1,4 +1,4 @@
-export default function Keyboard({ onKeyPress, letterStatus, activeKey }) {
+const Keyboard = ({ onKeyPress, letterStatus, activeKey }) => {
   const rows = [
     ["q","w","e","r","t","y","u","i","o","p"],
     ["a","s","d","f","g","h","j","k","l"],
@@ -26,3 +26,5 @@ export default function Keyboard({ onKeyPress, letterStatus, activeKey }) {
     </div>
   );
 }
+
+export default Keyboard;
