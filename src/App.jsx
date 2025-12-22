@@ -2,11 +2,9 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import Keyboard from "./components/Keyboard";
 import EmptyContainer from "./components/EmptyContainer";
-import FilledContainer from "./components/FilledContainer"
-import { list } from "./words"
+import { list } from "./words";
 
 function App() {
-
   const [guesses, setGuesses] = useState([]);
   const [input, setInput] = useState(["", "", "", "", ""]);
   const [success, setSuccess] = useState(false);
@@ -25,16 +23,14 @@ function App() {
 
   const PushEmpty = (length) => {
     for (let i = 0; i < length; i++) {
-      emptyLists.push(
-        <EmptyContainer/>
-      );
+      emptyLists.push(<EmptyContainer />);
     }
-  }
+  };
 
   if (!success) {
-    PushEmpty(4 - guesses.length)
+    PushEmpty(4 - guesses.length);
   } else {
-    PushEmpty(5 - guesses.length)
+    PushEmpty(5 - guesses.length);
   }
 
   const handleKeyPress = (key) => {
@@ -87,7 +83,9 @@ function App() {
         if (input.join("") === answer.join("")) {
           setSuccess(true);
         } else if (guesses.length >= 4) {
-          alert("실패하셨습니다 다시 한번 도전해보세요~ \n 단어: " + answer.join(""));
+          alert(
+            "실패하셨습니다 다시 한번 도전해보세요~ \n 단어: " + answer.join("")
+          );
           window.location.reload();
         }
 
@@ -101,12 +99,12 @@ function App() {
 
   const getColors = (inputArr, answerArr) => {
     const result = [];
-    const tempAnswer = [...answerArr]; 
+    const tempAnswer = [...answerArr];
 
     inputArr.forEach((letter, i) => {
       if (letter === tempAnswer[i]) {
         result[i] = "green";
-        tempAnswer[i] = null; 
+        tempAnswer[i] = null;
       }
     });
 
@@ -132,7 +130,13 @@ function App() {
         return (
           <div className="corres">
             {x.map((t, i) => (
-              <FilledContainer key={i} validity={validity} i={i} t={t}/>
+              <div
+                className={`flip container ${validity[i]}`}
+                style={{ animationDelay: `${i * 0.2}s` }}
+                key={i}
+              >
+                {t}
+              </div>
             ))}
           </div>
         );
