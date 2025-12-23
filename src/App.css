@@ -137,7 +137,7 @@ body {
   /* colors */
   .key.green { background: #538d4e; }
   .key.yellow { background: #b59f3b; }
-  .key.grey { background: #3a3a3c; }
+.grey { background: #cecece; }
   
   /* pressed */
   .key:active,

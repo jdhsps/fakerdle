@@ -1,0 +1,77 @@
+.alert-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.retry {
+  margin-top: 30px;
+  font-size: 25px;
+  color: #2c2c2c; /* Wordle green */
+  font-weight: 600;
+}
+
+.alert-box {
+  border: 1.5px solid #7b7b7b;
+  background: #fffffb;
+  padding: 30px 50px;
+  border-radius: 15px;
+  min-width: 280px;
+  max-width: 90%;
+  text-align: center;
+
+  font-family: "Arial", sans-serif;
+  font-size: 30px;
+  font-weight: 600;
+  color: #303032;
+
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  animation: pop-in 0.15s ease-out;
+}
+
+.alert-box br {
+  font-size: 30px;
+}
+
+.alert-box p {
+  margin: 0;
+  line-height: 1.4;
+  white-space: pre-line;
+}
+
+.alert-box button {
+  margin-top: 18px;
+  padding: 10px 16px;
+
+  background: #323232; /* Wordle green */
+  color: white;
+
+  border: none;
+  border-radius: 4px;
+
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+
+  cursor: pointer;
+}
+
+.alert-box button:hover {
+  background: #5a9a54;
+}
+
+@keyframes pop-in {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

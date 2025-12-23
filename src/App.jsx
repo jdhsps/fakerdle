@@ -3,12 +3,17 @@ import "./App.css";
 import Keyboard from "./components/Keyboard";
 import EmptyContainer from "./components/EmptyContainer";
 import { list } from "./words";
+import Alert from "./components/Alert";
 
 function App() {
   const [guesses, setGuesses] = useState([]);
   const [input, setInput] = useState(["", "", "", "", ""]);
   const [success, setSuccess] = useState(false);
   const [activeKey, setActiveKey] = useState(null);
+
+  const [alertMsg, setAlertMsg] = useState(null);
+
+  const [greys, setGreys] = useState([]);
 
   const [answer] = useState(() =>
     list[Math.floor(Math.random() * list.length)].split("")
@@ -83,10 +88,14 @@ function App() {
         if (input.join("") === answer.join("")) {
           setSuccess(true);
         } else if (guesses.length >= 4) {
-          alert(
-            "실패하셨습니다 다시 한번 도전해보세요~ \n 단어: " + answer.join("")
+          setAlertMsg(
+            <>
+              <strong>😔 실패하셨습니다 😔</strong>
+              <br />
+              <br />
+              단어: {answer.join("")}
+            </>
           );
-          window.location.reload();
         }
 
         setInput(["", "", "", "", ""]);
@@ -96,6 +105,28 @@ function App() {
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [alphabet, input, guesses, answer]);
+
+  const getKeyboardColors = () => {
+    const colorsMap = {};
+
+    guesses.forEach((guess) => {
+      const colors = getColors(guess, answer);
+
+      guess.forEach((letter, i) => {
+        const color = colors[i];
+
+        if (color === "green") {
+          colorsMap[letter] = "green";
+        } else if (color === "yellow" && colorsMap[letter] !== "green") {
+          colorsMap[letter] = "yellow";
+        } else if (color === "grey" && !colorsMap[letter]) {
+          colorsMap[letter] = "grey";
+        }
+      });
+    });
+
+    return colorsMap;
+  };
 
   const getColors = (inputArr, answerArr) => {
     const result = [];
@@ -149,9 +180,18 @@ function App() {
 
       <Keyboard
         onKeyPress={handleKeyPress}
-        letterStatus={{}}
         activeKey={activeKey}
+        keyColors={getKeyboardColors()}
       />
+
+      {alertMsg && (
+        <Alert
+          message={alertMsg}
+          onClose={() => {
+            window.location.reload();
+          }}
+        />
+      )}
     </div>
   );
 }

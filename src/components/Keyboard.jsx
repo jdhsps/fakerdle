@@ -1,8 +1,8 @@
-const Keyboard = ({ onKeyPress, letterStatus, activeKey }) => {
+const Keyboard = ({ onKeyPress, activeKey, keyColors = {} }) => {
   const rows = [
-    ["q","w","e","r","t","y","u","i","o","p"],
-    ["a","s","d","f","g","h","j","k","l"],
-    ["Enter","z","x","c","v","b","n","m","Backspace"],
+    ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
+    ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
+    ["Enter", "z", "x", "c", "v", "b", "n", "m", "Backspace"],
   ];
 
   return (
@@ -12,10 +12,10 @@ const Keyboard = ({ onKeyPress, letterStatus, activeKey }) => {
           {row.map((key) => (
             <button
               key={key}
-              className={`key 
-                ${letterStatus[key] || ""} 
-                ${activeKey === key ? "pressed" : ""}
-              `}
+              className={`key
+              ${keyColors[key] || ""}
+              ${activeKey === key ? "pressed" : ""}
+            `}
               onClick={() => onKeyPress(key)}
             >
               {key === "Backspace" ? "⌫" : key}
@@ -25,6 +25,6 @@ const Keyboard = ({ onKeyPress, letterStatus, activeKey }) => {
       ))}
     </div>
   );
-}
+};
 
 export default Keyboard;
